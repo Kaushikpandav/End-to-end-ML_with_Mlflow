@@ -1,172 +1,284 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Web App</title>
-        <link rel="icon" type="image/x-icon" href="static/assets/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="static/css/styles.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Luxury Wine Shop</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap"
+            rel="stylesheet" />
+        <style>
+            :root {
+                --wine-red: #722f37;
+                --gold: #c0a080;
+                --dark-bg: #1a1a1a;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                background: var(--dark-bg);
+                color: #fff;
+                font-family: "Montserrat", sans-serif;
+                min-height: 100vh;
+                overflow-x: hidden;
+            }
+
+            .navbar {
+                position: fixed;
+                width: 100%;
+                padding: 1rem;
+                background: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(10px);
+                z-index: 1000;
+            }
+
+            .masthead {
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                perspective: 1000px;
+                overflow: hidden;
+            }
+
+            .background-bottles {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                transform-style: preserve-3d;
+                animation: rotate 20s infinite linear;
+            }
+
+            .bottle {
+                position: absolute;
+                width: 60px;
+                height: 200px;
+                background: rgba(114, 47, 55, 0.3);
+                border-radius: 30px 30px 10px 10px;
+                transform-style: preserve-3d;
+            }
+
+            .bottle::before {
+                content: "";
+                position: absolute;
+                top: -20px;
+                left: 20px;
+                width: 20px;
+                height: 40px;
+                background: rgba(114, 47, 55, 0.3);
+                border-radius: 5px;
+            }
+
+            .bottle::after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 0;
+                width: 100%;
+                height: 50%;
+                background: rgba(192, 160, 128, 0.2);
+                border-radius: 0 0 10px 10px;
+            }
+
+            @keyframes rotate {
+                0% {
+                    transform: rotateY(0deg);
+                }
+
+                100% {
+                    transform: rotateY(360deg);
+                }
+            }
+
+            .content {
+                position: relative;
+                z-index: 1;
+                text-align: center;
+                padding: 2rem;
+                background: rgba(0, 0, 0, 0.6);
+                border-radius: 20px;
+                backdrop-filter: blur(10px);
+                transform: translateZ(50px);
+                animation: float 6s infinite ease-in-out;
+            }
+
+            @keyframes float {
+
+                0%,
+                100% {
+                    transform: translateY(0) rotateX(0);
+                }
+
+                50% {
+                    transform: translateY(-20px) rotateX(5deg);
+                }
+            }
+
+            h1 {
+                font-family: "Playfair Display", serif;
+                font-size: 4rem;
+                color: var(--gold);
+                margin-bottom: 1rem;
+                text-shadow: 0 0 20px rgba(192, 160, 128, 0.5);
+            }
+
+            .form-container {
+                max-width: 800px;
+                margin: 4rem auto;
+                padding: 2rem;
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(10px);
+                border-radius: 20px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .form-row {
+                margin-bottom: 1.5rem;
+            }
+
+            input {
+                width: 100%;
+                padding: 1rem;
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 10px;
+                color: white;
+                font-size: 1rem;
+            }
+
+            button {
+                background: var(--gold);
+                color: var(--dark-bg);
+                border: none;
+                padding: 1rem 2rem;
+                border-radius: 10px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: transform 0.3s;
+            }
+
+            button:hover {
+                transform: scale(1.05);
+            }
+
+            #wine-scene {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+            }
+
+            .floating-bottle {
+                position: absolute;
+                animation: floatAround 15s infinite linear;
+            }
+
+            @keyframes floatAround {
+                0% {
+                    transform: translate(0, 0) rotate(0deg);
+                }
+
+                25% {
+                    transform: translate(100px, 100px) rotate(90deg);
+                }
+
+                50% {
+                    transform: translate(0, 200px) rotate(180deg);
+                }
+
+                75% {
+                    transform: translate(-100px, 100px) rotate(270deg);
+                }
+
+                100% {
+                    transform: translate(0, 0) rotate(360deg);
+                }
+            }
+        </style>
     </head>
+
     <body>
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="/">Home</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
-<!--                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html">Home</a></li>-->
-<!--                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">About</a></li>-->
-<!--                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post.html">Sample Post</a></li>-->
-<!--                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a></li>-->
-                    </ul>
-                </div>
-            </div>
+        <nav class="navbar">
+            <a href="/" style="color: var(--gold); text-decoration: none; font-size: 1.5rem">Wine Shop</a>
         </nav>
-        <!-- Page Header-->
-        <header class="masthead" style="background-image: url('static/assets/img/wine.jpg')">
-            <div class="container position-relative px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-md-10 col-lg-8 col-xl-7">
-                        <div class="site-heading">
-                            <h1>Wine Quality Prediction</h1>
-                            <span class="subheading">A Wine Quality Checking Web App</span>
-                        </div>
-                    </div>
-                </div>
+
+        <header class="masthead">
+            <div class="background-bottles">
+                <!-- Generated dynamically via JavaScript -->
+            </div>
+
+            <div id="wine-scene">
+                <!-- Floating bottles added via JavaScript -->
+            </div>
+
+            <div class="content">
+                <h1>Wine Quality Prediction</h1>
+                <p style="color: var(--gold); font-size: 1.2rem">
+                    Discover Excellence in Every Bottle
+                </p>
             </div>
         </header>
 
-
-        <!-- Main Content-->
-        <div class="container px-4 px-lg-5">
-
-           <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>Form-v9 by Colorlib</title>
-	<!-- Mobile Specific Metas -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<!-- Font-->
-	<link rel="stylesheet" type="text/css" href="static/css2/nunito-font.css">
-	<!-- Main Style Css -->
-    <link rel="stylesheet" href="static/css2/style.css"/>
-</head>
-<body class="form-v9">
-	<div class="page-content">
-		<div class="form-v9-content" style="background-image: url('static/assets/img/form-v9.jpg')">
-			<form class="form-detail" action="/predict" method="post">
-				<h2>Please Fill The Information</h2>
-				<div class="form-row-total">
-
-					<div class="form-row">
-                        <label for="fixed_acidity"> Fixed Acidity:</label>
-						<input type="text" name="fixed_acidity" id="fixed_acidity" class="input-text" placeholder="fixed_acidity" required>
-					</div>
-
-					<div class="form-row">
-                        <label for="volatile_acidity"> Volatile Acidity:</label>
-						<input type="text" name="volatile_acidity" id="volatile_acidity" class="input-text" placeholder="volatile_acidity" required>
-					</div>
-
-				</div>
-
-
-				<div class="form-row-total">
-
-                    <div class="form-row">
-                        <label for="citric_acid"> Citric Acid:</label>
-						<input type="text" name="citric_acid" id="citric_acid" class="input-text" placeholder="citric_acid" required>
-					</div>
+        <main>
+            <div class="form-container">
+                <form action="/predict" method="post">
 
 
                     <div class="form-row">
-                        <label for="residual_sugar"> Residual Sugar:</label>
-						<input type="text" name="residual_sugar" id="residual_sugar" class="input-text" placeholder="residual_sugar" required>
-					</div>
-
-				</div>
-
-
-                <div class="form-row-total">
+                        <input type="text" name="fixed_acidity" placeholder="Fixed Acidity" required />
+                    </div>
+                    <div class="form-row">
+                        <input type="text" name="volatile_acidity" placeholder="Volatile Acidity" required />
+                    </div>
+                    <div class="form-row">
+                        <input type="text" name="citric_acid" id="citric_acid" placeholder="citric_acid" required />
+                    </div>
+                    <div class="form-row">
+                        <input type="text" name="residual_sugar" id="residual_sugar" placeholder="residual_sugar"
+                            required />
+                    </div>
 
                     <div class="form-row">
-                        <label for="chlorides"> Chlorides:</label>
-						<input type="text" name="chlorides" id="chlorides" class="input-text" placeholder="chlorides" required>
-					</div>
+                        <input type="text" name="chlorides" id="chlorides" class="input-text" placeholder="chlorides" required />
+                    </div>
 
                     <div class="form-row">
-                        <label for="free_sulfur_dioxide"> Free Sulfur Dioxide:</label>
-						<input type="text" name="free_sulfur_dioxide" id="free_sulfur_dioxide" class="input-text" placeholder="free_sulfur_dioxide" required>
-					</div>
-
-				</div>
-
-
-                <div class="form-row-total">
+                        <input type="text" name="free_sulfur_dioxide" id="free_sulfur_dioxide" class="input-text" placeholder="free_sulfur_dioxide" required />
+                    </div>
 
                     <div class="form-row">
-                        <label for="total_sulfur_dioxide"> Total Sulfur Dioxide:</label>
-						<input type="text" name="total_sulfur_dioxide" id="total_sulfur_dioxide" class="input-text" placeholder="total_sulfur_dioxide" required>
-					</div>
+                        <input type="text" name="total_sulfur_dioxide" id="total_sulfur_dioxide" class="input-text" placeholder="total_sulfur_dioxide" required />
+                    </div>
 
                     <div class="form-row">
-                        <label for="density"> Density:</label>
-						<input type="text" name="density" id="density" class="input-text" placeholder="density" required>
-					</div>
-
-				</div>
-
-
-                <div class="form-row-total">
+                        <input type="text" name="density" id="density" class="input-text" placeholder="density" required />
+                    </div>
 
                     <div class="form-row">
-                        <label for="pH"> pH:</label>
-						<input type="text" name="pH" id="pH" class="input-text" placeholder="pH" required>
-					</div>
+                        <input type="text" name="pH" id="pH" class="input-text" placeholder="pH" required />
+                    </div>
 
                     <div class="form-row">
-                        <label for="sulphates"> Sulphates:</label>
-						<input type="text" name="sulphates" id="sulphates" class="input-text" placeholder="sulphates" required>
-					</div>
-
-				</div>
-
-
-                <div class="form-row-total">
+                        <input type="text" name="sulphates" id="sulphates" class="input-text" placeholder="sulphates" required />
+                    </div>
 
                     <div class="form-row">
-                        <label for="alcohol"> Alcohol:</label>
-						<input type="text" name="alcohol" id="alcohol" class="input-text" placeholder="alcohol" required>
-					</div>
+                        <input type="text" name="alcohol" id="alcohol" class="input-text" placeholder="alcohol" required />
+                    </div>
 
-
-				</div>
-
-
-				<div class="form-row-last">
-					<input type="submit" name="register" class="register" value="Predict">
-				</div>
-			</form>
-		</div>
-	</div>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
-</html>
-
-        </div>
-
+                    <button type="submit">Predict Quality</button>
+                </form>
+            </div>
+        </main>
 
         <!-- Footer-->
         <footer class="border-top">
@@ -175,23 +287,23 @@
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <ul class="list-inline text-center">
                             <li class="list-inline-item">
-                                <a href="https://www.linkedin.com/in/boktiarahmed73/">
+                                <a href="https://www.linkedin.com/in/kaushik-pandav-41b433228/">
                                     <span class="fa-stack fa-lg">
                                         <i class="fas fa-circle fa-stack-2x"></i>
                                         <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
                                     </span>
                                 </a>
                             </li>
-                            <li class="list-inline-item">
-                                <a href="https://www.youtube.com/dswithbappy">
+                            <!-- <li class="list-inline-item">
+                                <a href="">
                                     <span class="fa-stack fa-lg">
                                         <i class="fas fa-circle fa-stack-2x"></i>
                                         <i class="fab fa-youtube fa-stack-1x fa-inverse"></i>
                                     </span>
                                 </a>
-                            </li>
+                            </li> -->
                             <li class="list-inline-item">
-                                <a href="https://github.com/entbappy">
+                                <a href="https://github.com/Kaushikpandav">
                                     <span class="fa-stack fa-lg">
                                         <i class="fas fa-circle fa-stack-2x"></i>
                                         <i class="fab fa-github fa-stack-1x fa-inverse"></i>
@@ -206,8 +318,32 @@
             </div>
         </footer>
         <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script> -->
         <!-- Core theme JS-->
         <script src="static/js/scripts.js"></script>
+        <script>
+            // Generate background bottles
+            const backgroundBottles = document.querySelector(".background-bottles");
+            for (let i = 0; i < 20; i++) {
+                const bottle = document.createElement("div");
+                bottle.className = "bottle";
+                bottle.style.left = `${Math.random() * 100}%`;
+                bottle.style.top = `${Math.random() * 100}%`;
+                bottle.style.transform = `translateZ(${Math.random() * 500 - 250}px)`;
+                backgroundBottles.appendChild(bottle);
+            }
+
+            // Add floating bottles
+            const wineScene = document.getElementById("wine-scene");
+            for (let i = 0; i < 5; i++) {
+                const bottle = document.createElement("div");
+                bottle.className = "bottle floating-bottle";
+                bottle.style.left = `${Math.random() * 100}%`;
+                bottle.style.top = `${Math.random() * 100}%`;
+                bottle.style.animationDelay = `${Math.random() * 5}s`;
+                wineScene.appendChild(bottle);
+            }
+        </script>
     </body>
+
 </html>

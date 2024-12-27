@@ -9,12 +9,20 @@ import joblib
 from mlProject.entity.config_entity import ModelEvaluationConfig
 from mlProject.utils.common import save_json
 from pathlib import Path
+import dagshub
 
+
+# Initialize DagsHub MLflow tracking
 
 class ModelEvaluation:
     def __init__(self, config: ModelEvaluationConfig):
         self.config = config
 
+    dagshub.init(
+        repo_owner="kaushikpandav",  # Replace with your DagsHub username
+        repo_name="End-to-end-ML_with_Mlflow",  # Replace with your DagsHub repository name
+        mlflow=True  # Enables MLflow tracking
+    )
     
     def eval_metrics(self,actual, pred):
         rmse = np.sqrt(mean_squared_error(actual, pred))
