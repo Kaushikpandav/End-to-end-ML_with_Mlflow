@@ -20,7 +20,7 @@ def training():
 
 @app.route('/predict',methods=['POST','GET']) # route to show the predictions in a web UI
 def index():
-    if request.method == 'POST':
+    # if request.method == 'POST':
         try:
             #  reading the inputs given by the user
             fixed_acidity =float(request.form['fixed_acidity'])
@@ -48,8 +48,8 @@ def index():
             print('The Exception message is: ',e)
             return 'something is wrong'
 
-    else:
-        return render_template('index.html')
+    # else:
+    #     return render_template('index.html')
 
 
 if __name__ == "__main__":
