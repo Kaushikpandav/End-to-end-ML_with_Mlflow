@@ -50,7 +50,13 @@ jobs:
 
       - name: Stop and remove existing container if running
         run: |
-          docker ps -a -q --filter "name=mlproject_withflow_ecr" | xargs -r docker rm -f
+            CONTAINER_ID=$(docker ps -a -q --filter "name=mlproject_withflow_ecr")
+            if [ -n "$CONTAINER_ID" ]; then
+              echo "Removing existing container $CONTAINER_ID"
+              docker rm -f $CONTAINER_ID
+            else
+              echo "No existing container to remove."
+            fi
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
