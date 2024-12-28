@@ -21,7 +21,7 @@
 Clone the repository
 
 ```bash
-https://github.com/kaushikpandav/End-to-end-Machine-Learning-Project-with-MLflow
+https://github.com/Kaushikpandav/End-to-end-Machine-Learning-Project-with-MLflow
 ```
 ### STEP 01- Create a conda environment after opening the repository
 
