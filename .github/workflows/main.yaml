@@ -48,6 +48,10 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
+      - name: Stop and remove existing container if running
+        run: |
+          docker ps -a -q --filter "name=mlproject_withflow_ecr" | xargs -r docker rm -f
+
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
         env:
