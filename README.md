@@ -21,7 +21,7 @@
 Clone the repository
 
 ```bash
-https://github.com/Kaushikpandav/End-to-end-ML_with_Mlflow/blob/main/README.md
+https://github.com/Kaushikpandav/End-to-end-ML_with_Mlflow
 ```
 ### STEP 01- Create a conda environment after opening the repository
 
