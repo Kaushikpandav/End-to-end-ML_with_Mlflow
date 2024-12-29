@@ -133,7 +133,7 @@ open up you local host and port
 
     AWS_REGION = us-east-1
 
-    AWS_ECR_LOGIN_URI = 288761733089.dkr.ecr.us-east-1.amazonaws.com
+    AWS_ECR_LOGIN_URI = <12_digitof_number>.dkr.ecr.us-east-1.amazonaws.com
 
     ECR_REPOSITORY_NAME = Your_Repo_name😊😊
 
