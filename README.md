@@ -1,5 +1,3 @@
-# End-to-end-Machine-Learning-Project-with-MLflow
-
 
 ## Workflows
 
@@ -12,7 +10,6 @@
 7. Update the pipeline 
 8. Update the main.py
 9. Update the app.py
-
 
 
 # How to run?
@@ -41,7 +38,6 @@ pip install -r requirements.txt
 #  pip install pywinpty-2.0.13-cp38-none-win_amd64.whl
 
 ```
-
 
 ```bash
 # Finally run the following command
@@ -102,8 +98,8 @@ open up you local host and port
 
 	
 ## 3. Create ECR repo to store/save docker image
-    - Save the URI: 288761733089.dkr.ecr.us-east-1.amazonaws.com/mlproject_withflow_ecr
-	288761733089.dkr.ecr.us-east-1.amazonaws.com/mlproject_withflow_ecr
+    - Save the URI: <12_digitof_number>.dkr.ecr.us-east-1.amazonaws.com/Your_Repo_name😊😊
+    
 ## 4. Create EC2 machine (Ubuntu) 
 
 ## 5. Open EC2 and Install docker in EC2 Machine:
@@ -137,18 +133,10 @@ open up you local host and port
 
     AWS_REGION = us-east-1
 
-    AWS_ECR_LOGIN_URI = demo>>  566373416292.dkr.ecr.ap-south-1.amazonaws.com
+    AWS_ECR_LOGIN_URI = 288761733089.dkr.ecr.us-east-1.amazonaws.com
 
-    ECR_REPOSITORY_NAME = simple-app
-
-
+    ECR_REPOSITORY_NAME = Your_Repo_name😊😊
 
 
-## About MLflow 
-MLflow
-
- - Its Production Grade
- - Trace all of your expriements
- - Logging & tagging your model
 
 
