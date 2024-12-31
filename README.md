@@ -1,11 +1,3 @@
-# How to run?
-### STEPS:
-
-Clone the repository
-
-```bash
-https://github.com/Kaushikpandav/End-to-end-ML_with_Mlflow
-```
 ### STEP 01- Create a conda environment after opening the repository
 
 ```bash
